@@ -106,7 +106,7 @@ describe("BinTree", function(){
     });
   });
 
-  describe("#contains", function(){
+  xdescribe("#contains", function(){
     var binTree;
     beforeEach(function() {
       binTree = new data.BinTree();
@@ -114,7 +114,7 @@ describe("BinTree", function(){
         binTree.insertRecursively(v);
       });
     });
-    describe("#iteratively", function(){
+    xdescribe("#iteratively", function(){
       it("should find a value in binTree with many values", function(){
         [7,3,9,1,99,44,66].forEach(function(v) {
           expect(binTree.containsIteratively(v)).to.equal(true);
@@ -128,7 +128,7 @@ describe("BinTree", function(){
         expect(binTree.containsIteratively(20)).to.equal(false);
       });
     });
-    describe("#recursively", function(){
+    xdescribe("#recursively", function(){
       it("should find a value in binTree with many values", function(){
         [7,3,9,1,99,44,66].forEach(function(v) {
           expect(binTree.containsRecursively(v)).to.equal(true);
@@ -143,7 +143,7 @@ describe("BinTree", function(){
       });
     });
   });
-    describe("breadth first search", function(){
+    xdescribe("breadth first search", function(){
       var binTree;
       beforeEach(function() {
         binTree = new data.BinTree();
@@ -155,30 +155,30 @@ describe("BinTree", function(){
         expect(binTree.breadthFirstSearch()).to.deep.eq([7,3,9,1,99,44,66]);
       });
     });
-    describe("depth first search", function(){
+    xdescribe("depth first search", function(){
       beforeEach(function() {
         binTree = new data.BinTree();
         [7,3,9,1,99,44,66].forEach(function(v) {
           binTree.insertRecursively(v);
         });
       });
-      describe("preorder", function(){
+      xdescribe("preorder", function(){
         it("searches from root - left - right", function(){
           expect(binTree.DFSPreOrder()).to.deep.eq([7, 3, 1, 9, 99, 44, 66]);
         });
       });
-      describe("inorder", function(){
+      xdescribe("inorder", function(){
         it("searches from left - root - right", function(){
           expect(binTree.DFSInOrder()).to.deep.eq([1, 3, 7, 9, 44, 66, 99]);
         });
       });
-      describe("postorder", function(){
+      xdescribe("postorder", function(){
         it("searches from left - right - root", function(){
           expect(binTree.DFSPostOrder()).to.deep.eq([1, 3, 66, 44, 99, 9, 7]);
         });
       });
     });
-    describe("#findLowest", function(){
+    xdescribe("#findLowest", function(){
       it("It should", function(){
         binTree = new data.BinTree();
         [7,3,9,1,99,44,66].forEach(function(v) {
@@ -187,7 +187,7 @@ describe("BinTree", function(){
         expect(binTree.findLowest()).to.equal(1);
       });
     });
-    describe("#findHighest", function(){
+    xdescribe("#findHighest", function(){
       it("It should", function(){
         binTree = new data.BinTree();
         [7,3,9,1,99,44,66].forEach(function(v) {
@@ -196,7 +196,7 @@ describe("BinTree", function(){
         expect(binTree.findHighest()).to.equal(99);
       });
     });
-    describe("#size", function(){
+    xdescribe("#size", function(){
       it("It should return the size of the binary tree", function(){
         binTree = new data.BinTree();
         [7,3,9,1,99,44,66].forEach(function(v) {
@@ -205,7 +205,7 @@ describe("BinTree", function(){
         expect(binTree.size()).to.equal(7);
       });
     });
-    describe("#remove", function(){
+    xdescribe("#remove", function(){
       beforeEach(function(){
         binTree = new data.BinTree();
         [7,3,9,8,5,1,99,44,33,66].forEach(function(v) {
