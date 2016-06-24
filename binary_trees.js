@@ -107,7 +107,7 @@ BinTree.prototype.containsRecursively = function(value,current){
 
   // define current node
   let currNode = current || current === null ? current : this.root;
-  
+
   if(currNode){
     if(value > currNode.value){
       return this.containsRecursively(value, currNode.right);
@@ -123,7 +123,29 @@ BinTree.prototype.containsRecursively = function(value,current){
 };
 
 BinTree.prototype.breadthFirstSearch = function() {
+  // return an array of all value left to right. 
+  // meaning in the order that the nodes were inserted
+  // if tree is empty, return an empty array
+  if(!this.root) return [];
+  // create a queue which will store the nodes in bfs order
+  // node will be inserted into result
+  let queue = [this.root], result = [];
 
+  while(queue.length){
+    // take out the first item in the queue
+    let currNode = queue.shift();
+    // add the current value into the result array
+    result.push(currNode.value);
+    // add nodes on left first
+    if(currNode.left){
+      queue.push(currNode.left);
+    }
+    // keep adding until all nodes are visited
+    if(currNode.right){
+      queue.push(currNode.right);
+    }
+  }
+  return result;
 };
 
 BinTree.prototype.DFSPreOrder = function() {
