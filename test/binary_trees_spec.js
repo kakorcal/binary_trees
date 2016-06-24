@@ -155,36 +155,27 @@ describe("BinTree", function(){
       expect(binTree.breadthFirstSearch()).to.deep.eq([7,3,9,1,99,44,66]);
     });
   });
-  xdescribe("depth first search", function(){
+  describe("depth first search", function(){
     beforeEach(function() {
       binTree = new data.BinTree();
       [7,3,9,1,99,44,66].forEach(function(v) {
         binTree.insertRecursively(v);
       });
     });
-    xdescribe("preorder", function(){
+    describe("preorder", function(){
       it("searches from root - left - right", function(){
         expect(binTree.DFSPreOrder()).to.deep.eq([7, 3, 1, 9, 99, 44, 66]);
       });
     });
-    xdescribe("inorder", function(){
+    describe("inorder", function(){
       it("searches from left - root - right", function(){
         expect(binTree.DFSInOrder()).to.deep.eq([1, 3, 7, 9, 44, 66, 99]);
       });
     });
-    xdescribe("postorder", function(){
+    describe("postorder", function(){
       it("searches from left - right - root", function(){
         expect(binTree.DFSPostOrder()).to.deep.eq([1, 3, 66, 44, 99, 9, 7]);
       });
-    });
-  });
-  xdescribe("#size", function(){
-    it("It should return the size of the binary tree", function(){
-      binTree = new data.BinTree();
-      [7,3,9,1,99,44,66].forEach(function(v) {
-        binTree.insertRecursively(v);
-      });
-      expect(binTree.size()).to.equal(7);
     });
   });
 });

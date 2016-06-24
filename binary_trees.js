@@ -149,19 +149,75 @@ BinTree.prototype.breadthFirstSearch = function() {
 };
 
 BinTree.prototype.DFSPreOrder = function() {
+  // return an array in order of root - left - right
+  // if tree is empty, return an empty array
+  if(!this.root) return [];
+  // create result array
+  let result = [];
+  let currNode = this.root;
+
+  function search(node){
+    // keep going left until null
+    // push the value if dead end
+    result.push(node.value);
+    if(node.left){
+      search(node.left);
+    }
+    if(node.right){
+      search(node.right);
+    }
+  }
+  search(currNode);
+  return result;
 
 };
 
 BinTree.prototype.DFSInOrder = function() {
+  // return an array in order of left - root - right. ie min to max
+  // if tree is empty, return an empty array
+  if(!this.root) return [];
+  // create result array
+  let result = [];
+  let currNode = this.root;
 
+  function search(node){
+    // keep going left until null
+    // push the value if dead end
+    if(node.left){
+      search(node.left);
+    }
+    // the search function doesn't return anything, 
+    // it will just mutate the result array
+    result.push(node.value);
+    if(node.right){
+      search(node.right);
+    }
+  }
+  search(currNode);
+  return result;
 };
 
 BinTree.prototype.DFSPostOrder = function() {
+  // searches from left - right - root
+  // if tree is empty, return an empty array
+  if(!this.root) return [];
+  // create result array
+  let result = [];
+  let currNode = this.root;
 
-};
-
-BinTree.prototype.size = function() {
-
+  function search(node){
+    // keep going left until null
+    // push the value if dead end
+    if(node.left){
+      search(node.left);
+    }
+    if(node.right){
+      search(node.right);
+    }
+    result.push(node.value);
+  }
+  search(currNode);
+  return result;
 };
 
 module.exports = {BinTree,Node};
