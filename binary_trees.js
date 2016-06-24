@@ -72,11 +72,54 @@ BinTree.prototype.insertRecursively = function(value,current){
 };
 
 BinTree.prototype.containsIteratively = function(value){
+  // return true if value is found in the tree
+  // check if value is valid
+  if(!Number.isInteger(value) || value < 0) return false;
+  // if tree is empty
+  if(!this.root) return false;
+  // traverse the tree
+  // define current node
+  let currNode = this.root;
 
+  while(currNode){
+    // compare values
+    if(currNode.value > value){
+      // go left
+      currNode = currNode.left;
+    }else if(currNode.value < value){
+      // go right
+      currNode = currNode.right;
+    }else{
+      // currNode.value === value
+      return true;
+    }
+  }
+  // return false if nothing is found
+  return false;
 };
 
 BinTree.prototype.containsRecursively = function(value,current){
+  // return true if value is found in the tree
+  // check if value is valid
+  if(!Number.isInteger(value) || value < 0) return false;
+  // if tree is empty
+  if(!this.root) return false;
 
+  // define current node
+  let currNode = current || current === null ? current : this.root;
+  
+  if(currNode){
+    if(value > currNode.value){
+      return this.containsRecursively(value, currNode.right);
+    }else if(value < currNode.value){
+      return this.containsRecursively(value, currNode.left);
+    }else{
+      return true;
+    }
+  }else{
+    // not found
+    return false;
+  }
 };
 
 BinTree.prototype.breadthFirstSearch = function() {

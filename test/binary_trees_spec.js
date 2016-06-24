@@ -106,7 +106,7 @@ describe("BinTree", function(){
     });
   });
 
-  xdescribe("#contains", function(){
+  describe("#contains", function(){
     var binTree;
     beforeEach(function() {
       binTree = new data.BinTree();
@@ -114,7 +114,7 @@ describe("BinTree", function(){
         binTree.insertRecursively(v);
       });
     });
-    xdescribe("#iteratively", function(){
+    describe("#iteratively", function(){
       it("should find a value in binTree with many values", function(){
         [7,3,9,1,99,44,66].forEach(function(v) {
           expect(binTree.containsIteratively(v)).to.equal(true);
@@ -128,7 +128,7 @@ describe("BinTree", function(){
         expect(binTree.containsIteratively(20)).to.equal(false);
       });
     });
-    xdescribe("#recursively", function(){
+    describe("#recursively", function(){
       it("should find a value in binTree with many values", function(){
         [7,3,9,1,99,44,66].forEach(function(v) {
           expect(binTree.containsRecursively(v)).to.equal(true);
