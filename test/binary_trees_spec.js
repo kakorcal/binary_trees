@@ -178,4 +178,103 @@ describe("BinTree", function(){
       });
     });
   });
+
+  describe('#reverse', function(){
+    var binTree;
+    beforeEach(function() {
+      binTree = new data.BinTree();
+      [7,3,9,1,99,44,66].forEach(function(v) {
+        binTree.insertRecursively(v);
+      });
+    });
+
+    it('should reverse all nodes', function(){
+      binTree.reverse();
+      expect(binTree.root.left.value).to.equal(9);
+      expect(binTree.root.left.left.value).to.equal(99);
+      expect(binTree.root.left.left.right.value).to.equal(44);
+      expect(binTree.root.left.left.right.left.value).to.equal(66);
+      expect(binTree.root.right.value).to.equal(3);
+      expect(binTree.root.right.right.value).to.equal(1);
+    });
+
+    it('should reverse the array order', function(){
+      binTree.reverse();
+      expect(binTree.DFSInOrder()).to.deep.eq([99, 66, 44, 9, 7, 3, 1]);
+    });
+  });
+
+  xdescribe("#remove", function(){
+    beforeEach(function(){
+      binTree = new data.BinTree();
+      [7,3,9,8,5,1,99,44,33,66].forEach(function(v) {
+        binTree.insertRecursively(v);
+      })
+    });
+    it("does not remove values not in the tree", function(){
+      expect(binTree.remove(100)).to.equal("Value not in the tree!");
+    });
+    it("removes leaf nodes correctly", function(){
+      binTree.remove(1);
+      expect(binTree.DFSInOrder()).to.deep.eq([3,5,7,8,9,33,44,66,99]);
+    });
+    it("removes a node with 1 child on the left", function() {
+      binTree = new data.BinTree();
+      binTree.insertRecursively(50);
+      binTree.insertRecursively(20);
+      binTree.insertRecursively(55);
+      binTree.insertRecursively(54);
+      binTree.remove(55);
+      expect(binTree.root.value).to.equal(50);
+      expect(binTree.root.right.value).to.equal(54);
+      expect(binTree.root.left.value).to.equal(20);
+      expect(binTree.root.left.left).to.equal(null);
+      expect(binTree.root.right.right).to.equal(null);
+    });
+    it("removes a node with 1 child on the right", function() {
+      binTree = new data.BinTree();
+      binTree.insertRecursively(50);
+      binTree.insertRecursively(20);
+      binTree.insertRecursively(21);
+      binTree.insertRecursively(54);
+      binTree.remove(20);
+      expect(binTree.root.value).to.equal(50);
+      expect(binTree.root.right.value).to.equal(54);
+      expect(binTree.root.left.value).to.equal(21);
+      expect(binTree.root.left.left).to.equal(null);
+      expect(binTree.root.right.right).to.equal(null);
+    });
+    it("removes nodes with two children correctly", function(){
+      binTree.remove(3);
+      expect(binTree.DFSInOrder()).to.deep.eq([1,5,7,8,9,33,44,66,99]);
+    });
+    it("removes the root node correctly when the root is a leaf", function(){
+      binTree = new data.BinTree();
+      binTree.insertRecursively(7);
+      binTree.remove(7)
+      expect(binTree.DFSInOrder()).to.deep.eq([]);
+    });
+    it("removes the root node correctly when the root has a child", function(){
+      binTree = new data.BinTree();
+      binTree.insertRecursively(7);
+      binTree.insertRecursively(10);
+      binTree.remove(7);
+      expect(binTree.DFSInOrder()).to.deep.eq([10]);
+    });
+    it("removes the root node correctly when the root has two children", function(){
+      binTree.remove(7);
+      expect(binTree.DFSInOrder()).to.deep.equal([1,3,5,8,9,33,44,66,99]);
+    });
+    it("removes correctly with 2 children and the right child doesn't have any left children", function() {
+      binTree = new data.BinTree();
+      binTree.insertRecursively(25);
+      binTree.insertRecursively(10);
+      binTree.insertRecursively(27);
+      binTree.insertRecursively(28);
+      binTree.remove(25);
+      expect(binTree.root.value).to.equal(27);
+      expect(binTree.root.left.value).to.equal(10);
+      expect(binTree.root.right.value).to.equal(28);
+    });
+  });
 });

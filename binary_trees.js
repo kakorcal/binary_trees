@@ -220,4 +220,29 @@ BinTree.prototype.DFSPostOrder = function() {
   return result;
 };
 
+BinTree.prototype.reverse = function(){
+  function swap(node){
+    [node.left, node.right] = [node.right, node.left];
+
+    if(node.left){
+      swap(node.left);
+    }
+
+    if(node.right){
+      swap(node.right);
+    }
+  }
+  
+  swap(this.root);
+};
+
+// private helper method for remove
+BinTree.prototype._countChildren = function(node){
+
+};
+
+BinTree.prototype.remove = function(value){
+  
+};
+
 module.exports = {BinTree,Node};
