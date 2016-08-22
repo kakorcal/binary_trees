@@ -247,7 +247,22 @@ BinTree.prototype._countChildren = function(node){
   }else{
     return null;
   }
-}
+};
+
+BinTree.prototype._leftmax = function(node){
+  if(!node) return null;
+  var currNode = node.left;
+  
+  if(!currNode.right) return node;
+
+  while(true){
+    if(!currNode.right.right){
+      return currNode;
+    }else{
+      currNode = currNode.right;
+    }
+  }
+};
 
 BinTree.prototype.remove = function(value){
   if(!this.root){
@@ -256,25 +271,33 @@ BinTree.prototype.remove = function(value){
   }
 
   var currNode = this.root;
-  var childCount;
+  var childCount, leftmax;
   while(true){
     if(currNode){
       if(currNode.left){
         if(currNode.left.value === value){
           childCount = this._countChildren(currNode.left);
           if(childCount === 0){
-            console.log('// case 3 - remove leafs');
-            // if the node has no children
+            console.log('// case 3 left - remove leafs');
             currNode.left = null; 
           }else if(childCount === 1){
-            console.log('// case 4 - one child');
+            console.log('// case 4 left - one child');
             if(currNode.left.left){
               currNode.left = currNode.left.left;
             }else{
               currNode.left = currNode.left.right;
             }
           }else if(childCount === 2){
-            console.log('// case 5 - two children');
+            console.log('// case 5 left - two children');
+            leftmax = this._leftmax(currNode.left);
+
+            if(leftmax.value === currNode.left.value){
+              console.log('// direct child');
+              leftmax.left.right = currNode.left.right;
+              currNode.left = leftmax.left;
+            }else{
+              console.log('// indirect child');
+            }
           }
           return this;
         }
@@ -284,17 +307,26 @@ BinTree.prototype.remove = function(value){
         if(currNode.right.value === value){
           childCount = this._countChildren(currNode.right);
           if(childCount === 0){
-            console.log('// case 3 - remove leafs');
+            console.log('// case 3 right - remove leafs');
             currNode.right = null;
           }else if(childCount === 1){  
-            console.log('// case 4 - one child');
+            console.log('// case 4 right - one child');
             if(currNode.right.left){
               currNode.right = currNode.right.left;
             }else{
               currNode.right = currNode.right.right;
             }
           }else if(childCount === 2){
-            console.log('// case 5 - two children');
+            console.log('// case 5 right - two children');
+            leftmax = this._leftmax(currNode.right);
+
+            if(leftmax.value === currNode.right.value){
+              console.log('// direct child');
+              leftmax.left.right = currNode.right.right;
+              currNode.right = leftmax.left;
+            }else{
+              console.log('// indirect child');
+            }
           }
           return this;
         }
