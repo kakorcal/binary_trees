@@ -366,7 +366,40 @@ BinTree.prototype.remove = function(value){
 
       if(currNode.value === value){
          console.log('// case 1 - remove root');
-         this.root = null;
+         if(!currNode.left && !currNode.right){
+            console.log('// no children');
+            this.root = null;
+         }else if(!currNode.left && currNode.right){
+            console.log('// right child');
+            this.root = this.root.right;
+         }else if(currNode.left){
+            console.log('// two children or left child');
+            leftmax = this._leftmax(currNode);
+
+            if(leftmax.value === currNode.value){
+              console.log('// direct');
+              currNode.left.right = currNode.right;
+              this.root = currNode.left;
+            }else{
+              console.log('// indirect');
+              leftmaxValue = leftmax.right.value;
+              leftmaxChildren = leftmax.right.left;
+
+              leftmax.right.right = currNode.right;
+              leftmax.right.left = currNode.left;
+              this.root = leftmax.right;
+              
+              currNode = currNode.left;
+              while(true){
+                if(currNode.right.value === leftmaxValue){
+                  currNode.right = leftmaxChildren;
+                  return this;
+                }else{
+                  currNode = currNode.right;
+                }
+              }
+            }
+         }
          return this;
       }else if(currNode.value > value){
         currNode = currNode.left;

@@ -254,18 +254,18 @@ describe("BinTree", function(){
       binTree.remove(7)
       expect(binTree.DFSInOrder()).to.deep.eq([]);
     });
-    xit("removes the root node correctly when the root has a child", function(){
+    it("removes the root node correctly when the root has a child", function(){
       binTree = new data.BinTree();
       binTree.insertRecursively(7);
       binTree.insertRecursively(10);
       binTree.remove(7);
       expect(binTree.DFSInOrder()).to.deep.eq([10]);
     });
-    xit("removes the root node correctly when the root has two children", function(){
+    it("removes the root node correctly when the root has two children", function(){
       binTree.remove(7);
       expect(binTree.DFSInOrder()).to.deep.equal([1,3,5,8,9,33,44,66,99]);
     });
-    xit("removes correctly with 2 children and the right child doesn't have any left children", function() {
+    it("removes correctly with 2 children and the right child doesn't have any left children", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(25);
       binTree.insertRecursively(10);
