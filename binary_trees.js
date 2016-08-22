@@ -238,28 +238,67 @@ BinTree.prototype.reverse = function(){
 
 // private helper method for remove
 BinTree.prototype._countChildren = function(node){
+  var currNode = node ? node : this.root;
+  var count = 0;
+  
+  search(currNode);
 
+  return count;
+
+  function search(node){
+    if(node){
+      if(node.left){
+        search(node.left);
+        count++;
+      }
+      if(node.right){
+        search(node.right);
+        count++;
+      }
+    }
+  }
 };
 
 BinTree.prototype.remove = function(value){
   // case 0 - no tree
   if(!this.root) return null;
   var currNode = this.root;
-
+  var childCount;
   while(true){
     if(currNode){
       if(currNode.left){
         if(currNode.left.value === value){
-          // case 3 - remove leafs
-          currNode.left = null;
+          childCount = this._countChildren(currNode.left);
+          if(!childCount){
+            // case 3 - remove leafs
+            // if the node has no children
+            currNode.left = null; 
+          }else{
+            // case 4 - one children
+            if(currNode.left.left){
+              currNode.left = currNode.left.left;
+            }else{
+              currNode.left = currNode.left.right;
+            }
+          }
           return this;
         }
       }
 
       if(currNode.right){
         if(currNode.right.value === value){
-          // case 3 - remove leafs
-          currNode.right = null;
+          childCount = this._countChildren(currNode.right);
+          if(!childCount){
+            // case 3 - remove leafs
+            currNode.right = null;
+          }else{  
+            // case 4 - one children
+            if(currNode.right.left){
+              currNode.right = currNode.right.left;
+            }else{
+              currNode.right = currNode.right.right;
+            }
+          }
           return this;
         }
       }
@@ -279,8 +318,8 @@ BinTree.prototype.remove = function(value){
     }
   }
   
-  // case 4 - one children
   // case 5 - two children
+
   return this;
 };
 

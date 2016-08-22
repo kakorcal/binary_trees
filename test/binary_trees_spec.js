@@ -218,7 +218,7 @@ describe("BinTree", function(){
       binTree.remove(1);
       expect(binTree.DFSInOrder()).to.deep.eq([3,5,7,8,9,33,44,66,99]);
     });
-    xit("removes a node with 1 child on the left", function() {
+    it("removes a node with 1 child on the left", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(50);
       binTree.insertRecursively(20);
@@ -231,7 +231,7 @@ describe("BinTree", function(){
       expect(binTree.root.left.left).to.equal(null);
       expect(binTree.root.right.right).to.equal(null);
     });
-    xit("removes a node with 1 child on the right", function() {
+    it("removes a node with 1 child on the right", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(50);
       binTree.insertRecursively(20);
