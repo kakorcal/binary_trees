@@ -238,30 +238,23 @@ BinTree.prototype.reverse = function(){
 
 // private helper method for remove
 BinTree.prototype._countChildren = function(node){
-  var currNode = node ? node : this.root;
-  var count = 0;
-  
-  search(currNode);
-
-  return count;
-
-  function search(node){
-    if(node){
-      if(node.left){
-        search(node.left);
-        count++;
-      }
-      if(node.right){
-        search(node.right);
-        count++;
-      }
-    }
+  if(!node.left && !node.right){
+    return 0;
+  }else if((node.left && !node.right) || (!node.left && node.right)){
+    return 1;
+  }else if(node.left && node.right){
+    return 2;
+  }else{
+    return null;
   }
-};
+}
 
 BinTree.prototype.remove = function(value){
-  // case 0 - no tree
-  if(!this.root) return null;
+  if(!this.root){
+    console.log('// case 0 - no tree');
+    return null;
+  }
+
   var currNode = this.root;
   var childCount;
   while(true){
@@ -269,17 +262,19 @@ BinTree.prototype.remove = function(value){
       if(currNode.left){
         if(currNode.left.value === value){
           childCount = this._countChildren(currNode.left);
-          if(!childCount){
-            // case 3 - remove leafs
+          if(childCount === 0){
+            console.log('// case 3 - remove leafs');
             // if the node has no children
             currNode.left = null; 
-          }else{
-            // case 4 - one children
+          }else if(childCount === 1){
+            console.log('// case 4 - one child');
             if(currNode.left.left){
               currNode.left = currNode.left.left;
             }else{
               currNode.left = currNode.left.right;
             }
+          }else if(childCount === 2){
+            console.log('// case 5 - two children');
           }
           return this;
         }
@@ -288,23 +283,25 @@ BinTree.prototype.remove = function(value){
       if(currNode.right){
         if(currNode.right.value === value){
           childCount = this._countChildren(currNode.right);
-          if(!childCount){
-            // case 3 - remove leafs
+          if(childCount === 0){
+            console.log('// case 3 - remove leafs');
             currNode.right = null;
-          }else{  
-            // case 4 - one children
+          }else if(childCount === 1){  
+            console.log('// case 4 - one child');
             if(currNode.right.left){
               currNode.right = currNode.right.left;
             }else{
               currNode.right = currNode.right.right;
             }
+          }else if(childCount === 2){
+            console.log('// case 5 - two children');
           }
           return this;
         }
       }
 
       if(currNode.value === value){
-         // case 1 - remove root
+         console.log('// case 1 - remove root');
          this.root = null;
          return this;
       }else if(currNode.value > value){
@@ -313,13 +310,10 @@ BinTree.prototype.remove = function(value){
         currNode = currNode.right;
       }
     }else{
-      // case 2 - value not found
+      console.log('// case 2 - value not found');
       return 'Value not in the tree!';
     }
   }
-  
-  // case 5 - two children
-
   return this;
 };
 
