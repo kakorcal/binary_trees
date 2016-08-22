@@ -271,7 +271,7 @@ BinTree.prototype.remove = function(value){
   }
 
   var currNode = this.root;
-  var childCount, leftmax;
+  var childCount, leftmax, leftmaxValue, leftmaxChildren;
   while(true){
     if(currNode){
       if(currNode.left){
@@ -297,6 +297,22 @@ BinTree.prototype.remove = function(value){
               currNode.left = leftmax.left;
             }else{
               console.log('// indirect child');
+              leftmaxValue = leftmax.right.value;
+              leftmaxChildren = leftmax.right.left;
+
+              leftmax.right.right = currNode.left.right;
+              leftmax.right.left = currNode.left.left;
+              currNode.left = leftmax.right;
+              
+              currNode = currNode.left.left;
+              while(true){
+                if(currNode.right.value === leftmaxValue){
+                  currNode.right = leftmaxChildren;
+                  return this;
+                }else{
+                  currNode = currNode.right;
+                }
+              }
             }
           }
           return this;
@@ -326,6 +342,22 @@ BinTree.prototype.remove = function(value){
               currNode.right = leftmax.left;
             }else{
               console.log('// indirect child');
+              leftmaxValue = leftmax.right.value;
+              leftmaxChildren = leftmax.right.left;
+
+              leftmax.right.right = currNode.right.right;
+              leftmax.right.left = currNode.right.left;
+              currNode.right = leftmax.right;
+              
+              currNode = currNode.right.left;
+              while(true){
+                if(currNode.right.value === leftmaxValue){
+                  currNode.right = leftmaxChildren;
+                  return this;
+                }else{
+                  currNode = currNode.right;
+                }
+              }
             }
           }
           return this;

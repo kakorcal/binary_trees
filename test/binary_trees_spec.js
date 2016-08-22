@@ -244,7 +244,7 @@ describe("BinTree", function(){
       expect(binTree.root.left.left).to.equal(null);
       expect(binTree.root.right.right).to.equal(null);
     });
-    xit("removes nodes with two children correctly", function(){
+    it("removes nodes with two children correctly", function(){
       binTree.remove(3);
       expect(binTree.DFSInOrder()).to.deep.eq([1,5,7,8,9,33,44,66,99]);
     });
