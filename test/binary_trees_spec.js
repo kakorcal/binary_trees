@@ -204,7 +204,7 @@ describe("BinTree", function(){
     });
   });
 
-  xdescribe("#remove", function(){
+  describe("#remove", function(){
     beforeEach(function(){
       binTree = new data.BinTree();
       [7,3,9,8,5,1,99,44,33,66].forEach(function(v) {
@@ -218,7 +218,7 @@ describe("BinTree", function(){
       binTree.remove(1);
       expect(binTree.DFSInOrder()).to.deep.eq([3,5,7,8,9,33,44,66,99]);
     });
-    it("removes a node with 1 child on the left", function() {
+    xit("removes a node with 1 child on the left", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(50);
       binTree.insertRecursively(20);
@@ -231,7 +231,7 @@ describe("BinTree", function(){
       expect(binTree.root.left.left).to.equal(null);
       expect(binTree.root.right.right).to.equal(null);
     });
-    it("removes a node with 1 child on the right", function() {
+    xit("removes a node with 1 child on the right", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(50);
       binTree.insertRecursively(20);
@@ -244,7 +244,7 @@ describe("BinTree", function(){
       expect(binTree.root.left.left).to.equal(null);
       expect(binTree.root.right.right).to.equal(null);
     });
-    it("removes nodes with two children correctly", function(){
+    xit("removes nodes with two children correctly", function(){
       binTree.remove(3);
       expect(binTree.DFSInOrder()).to.deep.eq([1,5,7,8,9,33,44,66,99]);
     });
@@ -254,18 +254,18 @@ describe("BinTree", function(){
       binTree.remove(7)
       expect(binTree.DFSInOrder()).to.deep.eq([]);
     });
-    it("removes the root node correctly when the root has a child", function(){
+    xit("removes the root node correctly when the root has a child", function(){
       binTree = new data.BinTree();
       binTree.insertRecursively(7);
       binTree.insertRecursively(10);
       binTree.remove(7);
       expect(binTree.DFSInOrder()).to.deep.eq([10]);
     });
-    it("removes the root node correctly when the root has two children", function(){
+    xit("removes the root node correctly when the root has two children", function(){
       binTree.remove(7);
       expect(binTree.DFSInOrder()).to.deep.equal([1,3,5,8,9,33,44,66,99]);
     });
-    it("removes correctly with 2 children and the right child doesn't have any left children", function() {
+    xit("removes correctly with 2 children and the right child doesn't have any left children", function() {
       binTree = new data.BinTree();
       binTree.insertRecursively(25);
       binTree.insertRecursively(10);

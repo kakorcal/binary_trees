@@ -242,7 +242,46 @@ BinTree.prototype._countChildren = function(node){
 };
 
 BinTree.prototype.remove = function(value){
+  // case 0 - no tree
+  if(!this.root) return null;
+  var currNode = this.root;
+
+  while(true){
+    if(currNode){
+      if(currNode.left){
+        if(currNode.left.value === value){
+          // case 3 - remove leafs
+          currNode.left = null;
+          return this;
+        }
+      }
+
+      if(currNode.right){
+        if(currNode.right.value === value){
+          // case 3 - remove leafs
+          currNode.right = null;
+          return this;
+        }
+      }
+
+      if(currNode.value === value){
+         // case 1 - remove root
+         this.root = null;
+         return this;
+      }else if(currNode.value > value){
+        currNode = currNode.left;
+      }else{
+        currNode = currNode.right;
+      }
+    }else{
+      // case 2 - value not found
+      return 'Value not in the tree!';
+    }
+  }
   
+  // case 4 - one children
+  // case 5 - two children
+  return this;
 };
 
 module.exports = {BinTree,Node};
